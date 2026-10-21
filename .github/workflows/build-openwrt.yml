@@ -7,7 +7,7 @@ permissions:
   contents: write
 
 env:
-  REPO_URL: https://github.com/ljty06/lede
+  REPO_URL: https://github.com/coolsnowwolf/lede
   REPO_BRANCH: master
   TZ: Asia/Shanghai
 
@@ -39,6 +39,7 @@ jobs:
       run: |
         df -hT $PWD
         git clone $REPO_URL -b $REPO_BRANCH openwrt
+        git -C openwrt checkout 07cebbcf28f61637047645c3fedc829ee9cc3688
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
 
     - name: 更新并安装 feeds
@@ -50,7 +51,7 @@ jobs:
     - name: 应用厂商配置并禁用问题包
       run: |
         cd openwrt
-        cp config_73.buildinfo .config
+        cp config-vm-verified.config .config
         sed -i 's/^CONFIG_PACKAGE_vlmcsd=y/# CONFIG_PACKAGE_vlmcsd is not set/' .config
         sed -i 's/^CONFIG_PACKAGE_vlmcsd=m/# CONFIG_PACKAGE_vlmcsd is not set/' .config
         sed -i 's/^CONFIG_PACKAGE_luci-app-vlmcsd=y/# CONFIG_PACKAGE_luci-app-vlmcsd is not set/' .config
