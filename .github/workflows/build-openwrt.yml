@@ -51,7 +51,7 @@ jobs:
     - name: 应用厂商配置并禁用问题包
       run: |
         cd openwrt
-        cp config-vm-verified.config .config
+        curl -sL https://raw.githubusercontent.com/ljty06/lede/master/config-vm-verified.config -o .config && wc -l .config
         sed -i 's/^CONFIG_PACKAGE_vlmcsd=y/# CONFIG_PACKAGE_vlmcsd is not set/' .config
         sed -i 's/^CONFIG_PACKAGE_vlmcsd=m/# CONFIG_PACKAGE_vlmcsd is not set/' .config
         sed -i 's/^CONFIG_PACKAGE_luci-app-vlmcsd=y/# CONFIG_PACKAGE_luci-app-vlmcsd is not set/' .config
