@@ -63,6 +63,7 @@ jobs:
         sed -i 's/^CONFIG_PACKAGE_tcpdump=m/# CONFIG_PACKAGE_tcpdump is not set/' .config
         sed -i 's/^CONFIG_PACKAGE_icu=y/# CONFIG_PACKAGE_icu is not set/' .config
         sed -i 's/^CONFIG_PACKAGE_icu=m/# CONFIG_PACKAGE_icu is not set/' .config
+        sed -i 's/^CONFIG_CCACHE=y/# CONFIG_CCACHE is not set/' .config
         make defconfig
         grep -E '^CONFIG_TARGET_x86' .config | head -3
 
